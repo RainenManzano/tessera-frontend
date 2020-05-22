@@ -1,0 +1,25 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Priority Information</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<div>
+			<p><strong>ID:</strong> {{ priorityInfo?.Priority_Id }}</p>
+			<p><strong>Level: </strong>{{ priorityInfo?.Level }}</p>
+			<p>
+				<strong>Duration: </strong>
+				{{ convertDuration(priorityInfo?.Days, priorityInfo?.Hours, priorityInfo?.Minutes) }}
+			</p>
+			<p><strong>Label: </strong>{{ priorityInfo?.Label }}</p>
+		</div><br>
+		<button type="button" mat-raised-button class="pull-right" 
+			color="warn" matTooltip="Delete priority"  
+			(click)="onDelete()"><span class="fas fa-trash"></span>
+		</button>
+		<button type="button" mat-raised-button class="pull-right" 
+			color="primary" matTooltip="Edit priority"  
+			(click)="onEdit()"><span class="fas fa-edit"></span>
+		</button>
+
+	</mat-card-content>	
+</mat-card>

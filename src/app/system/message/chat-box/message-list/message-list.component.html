@@ -1,0 +1,10 @@
+<div id="chat-message-list">
+	<div class="message-row" *ngFor="let message of messages" 
+		[ngClass]="{'you-message': message?.Is_User==1, 'other-message': message?.Is_User==0}">
+		<div class="message-content">
+			<img [src]="recipientImg" *ngIf="message?.Is_User==0">
+			<div class="message-text">{{ message?.Message }}</div>
+			<div class="message-time">{{ message?.Date_Created }}</div>
+		</div>
+	</div>
+</div>

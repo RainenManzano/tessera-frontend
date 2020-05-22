@@ -1,0 +1,11 @@
+.side {
+	width: 30%;
+	padding: 0px;
+	float: left;
+}
+
+.message-content {
+	width: 70%;
+	padding: 0px;
+	float: left;
+}

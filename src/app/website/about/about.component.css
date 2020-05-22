@@ -1,0 +1,25 @@
+.container{
+	width:90%;
+	margin:auto;
+	overflow:hidden;
+}
+
+article#main-col{
+	float:left;
+	width:60%;
+}
+
+.dark{
+	padding:30px;
+	background:#343535;
+	color:#fff;
+	margin:10px 0 10px 0;
+
+}
+
+aside#sidebar{
+	width:35%;
+	float:right;
+	margin-top:40px;
+}
+

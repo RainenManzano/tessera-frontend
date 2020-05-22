@@ -1,0 +1,52 @@
+mat-card {
+    margin: 10px;
+}
+
+.nav-active{
+	color:#ebebeb;
+    background:#c1c1c1;
+    color:#ebebeb
+}
+
+nav {
+    padding:15px;
+}
+
+ul {
+	padding:0;
+    margin:0;
+}
+
+li {
+	display:inline;
+	padding:5px 10px 5px 10px;
+	border-radius:5px;
+    margin-left:23px;
+}
+
+li.stats:hover {
+	color:#ebebeb;
+	background:#c1c1c1;
+    transition:.3s ease;
+    cursor: pointer;
+}
+
+a {
+	text-decoration:none;
+    color:#343535;
+    font-weight:700;
+}
+
+#search {
+    color: black;
+    background: transparent;
+    cursor: default;
+    padding: 0;
+}
+
+#search:hover {
+    color: black;
+    background: transparent;
+    cursor: default;
+    padding: 0;
+}

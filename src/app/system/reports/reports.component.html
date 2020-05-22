@@ -1,0 +1,38 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Report Generator</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<div class="box-container">
+			<div class="row">
+				<mat-form-field appearance="outline" class="col-md-6">
+					<mat-label>Type of Report</mat-label>
+					<mat-select (selectionChange)="onReportChange($event.value)">
+						<mat-option value="Ticket">Ticket Report</mat-option>
+						<mat-option value="Maintenance">Maintenance Report</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field class="col-md-6" *ngIf="maintenanceOptions==true" appearance="outline">
+					<mat-label>Type of maintenance</mat-label>
+					<mat-select (selectionChange)="onMaintenanceChange($event.value)">
+						<mat-option value="Department">Department</mat-option>
+						<mat-option value="Position">Position</mat-option>
+						<mat-option value="Priority">Priority</mat-option>
+						<mat-option value="Category">Category</mat-option>
+						<mat-option value="Issue">Issue</mat-option>
+						<mat-option value="Support Preferences">Support Preferences</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field class="col-md-6" *ngIf="ticketOptions==true" appearance="outline">
+					<mat-label>Type of Ticket Report</mat-label>
+					<mat-select (selectionChange)="onTicketChange($event.value)">
+						<mat-option value="allTickets">All Tickets</mat-option>
+						<mat-option value="Performance">Performance Report</mat-option>
+						<mat-option value="Summary">Summary Report</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<button mat-raised-button (click)="generateReport()">Go</button>
+			</div>
+		</div>
+	</mat-card-content>
+</mat-card>

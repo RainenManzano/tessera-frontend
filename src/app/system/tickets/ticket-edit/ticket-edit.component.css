@@ -1,0 +1,29 @@
+mat-card {
+	width: 48%;
+	float:left;
+	margin:10px	0px 10px 10px;
+}
+
+mat-card-content {
+	width: 100%;
+}
+
+mat-form-field {
+	width: 100%;
+}
+
+mat-error {
+	font-size: 15px;
+}
+
+button {
+	margin: 5px;
+}
+
+textarea {
+	width: 100%;
+}
+
+::ng-deep .matToolTip {
+  white-space: pre-line;
+}

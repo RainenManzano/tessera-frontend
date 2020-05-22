@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Add Priority</h1>
+<form [formGroup]="priorityForm" (ngSubmit)="onAddPriority()"> 
+<div mat-dialog-content>
+
+	<mat-form-field>
+		<mat-label>Label</mat-label>
+		<input type="text" formControlName="label" matInput>
+		<mat-error *ngIf="priorityForm.get('label').hasError('required')">This field is required</mat-error>
+		<mat-error *ngIf="priorityForm.get('label').hasError('labelExists')">Label already exists</mat-error>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Level</mat-label>
+		<input type="text" formControlName="level" matInput>
+		<mat-error *ngIf="priorityForm.get('level').hasError('required')">This field is required</mat-error>
+		<mat-error *ngIf="priorityForm.get('level').hasError('levelExists')">Level already exists</mat-error>
+	</mat-form-field>
+
+	<mat-form-field>
+		<mat-label>Days</mat-label>
+		<input type="text" formControlName="days" matInput>
+		<mat-error>This field is required</mat-error>
+	</mat-form-field>
+
+	<span class="label">Hours:</span>
+	<mat-slider
+		thumbLabel
+		tickInterval="1000"
+		min="0"
+		max="24"
+		formControlName="hours"
+		#hoursReference>
+	</mat-slider><br>
+	<span class="pull-right">Value: {{ hoursReference.value }}</span>
+	
+	<span class="label">Minutes:</span>
+	<mat-slider
+		thumbLabel
+		tickInterval="1000"
+		min="1"
+		max="60"
+		formControlName="minutes"
+		#minutesReference>
+	</mat-slider>
+	<span class="pull-right">Value: {{ minutesReference.value }}</span>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button cdkFocusInitial type="submit">Ok</button>
+</div>
+</form>

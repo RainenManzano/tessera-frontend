@@ -1,0 +1,53 @@
+mat-card {
+	width: 48%;
+	float:left;
+	margin: 10px;
+	padding: 0;
+}
+
+.buttonModification {
+	height: 80%;
+    margin: 15px 0px 0px 0px;
+}
+
+#filter {
+	margin-top: 10px;
+}
+
+#headerText {
+	margin-top: 15px; 
+	font-size: 20px; 
+	font-weight: 500;
+}
+
+.mat-card {
+	max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.well {
+	padding: 0px;
+	margin: 0px;
+}
+
+.center {
+	text-align: center;
+}
+
+.row.no-pad {
+  margin-right:0;
+  margin-left:0;
+}
+.row.no-pad > [class*='col-'] {
+  padding-right:0;
+  padding-left:0;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+table {
+  width: 100%;
+}

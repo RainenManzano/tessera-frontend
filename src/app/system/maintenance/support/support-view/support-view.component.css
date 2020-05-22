@@ -1,0 +1,10 @@
+mat-card {
+	width: 28%;
+	float:left;
+	margin:10px	0px 10px 10px;
+}
+
+.mat-raised-button {
+	margin: 5px 5px 5px 20px;
+	margin-left: 20px;
+}

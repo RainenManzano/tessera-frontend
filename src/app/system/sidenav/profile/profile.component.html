@@ -1,0 +1,16 @@
+<ng-template #popContent>
+		<div class="img-container">
+		</div>
+		<div class="pull-left">
+			<a class="btn btn-default btn-flat" [routerLink]="['profile']">Profile</a>
+      	</div>
+		<div class="pull-right">
+			<a class="btn btn-default btn-flat" (click)="onLogout()">Log out</a>
+  		</div>
+</ng-template>
+
+<button type="button" mat-button style="padding-top: 5px;"
+	[ngbPopover]="popContent" 
+	[autoClose]="true">
+ 	<i class="far fa-user toolbar-icon"></i>
+</button>

@@ -1,0 +1,22 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Position Information</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<div>
+			<p><strong>Position ID:</strong> {{ positionInfo?.Position_Id }}</p>
+			<p><strong>Name: </strong>{{ positionInfo?.Position_Name }}</p>
+			<p><strong>Description: </strong></p>
+			<i>&nbsp;&nbsp;{{ positionInfo?.Position_Desc }}</i>
+			<p><strong>Department: </strong>{{ positionInfo?.Department }}</p>
+		</div><br>
+		<button type="button" mat-raised-button class="pull-right" 
+			color="warn" matTooltip="Delete position"  
+			(click)="onDelete()"><span class="fas fa-trash"></span>
+		</button>
+		<button type="button" mat-raised-button class="pull-right" 
+			color="primary" matTooltip="Edit position"  
+			(click)="onEdit()"><span class="fas fa-edit"></span>
+		</button>
+	</mat-card-content>	
+</mat-card>

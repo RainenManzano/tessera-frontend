@@ -1,0 +1,11 @@
+.form-field {
+	width: 100% !important;
+}
+
+.between {
+	margin: 5px;
+}
+
+::ng-deep .matToolTip {
+  white-space: pre-line;
+}

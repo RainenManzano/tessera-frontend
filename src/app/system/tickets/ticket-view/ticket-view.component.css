@@ -1,0 +1,73 @@
+mat-card {
+	width: 48%;
+	float:left;
+	margin:10px	0px 10px 10px;
+}
+
+button {
+	margin: 5px;
+}
+
+#status {
+	padding:10px;
+	font-size:15px; 
+	text-align: center;
+	opacity: 0.8;
+	cursor: pointer;
+}
+
+#status span {
+	color:#fff; 
+	margin:auto;
+}
+
+#box-body {
+	display:block; 
+	margin:auto;
+	margin-top:10px;
+}
+
+.box-container {
+	/*padding: 10px;*/
+	width:100%;
+	margin: 0;
+	background-color: #efeded;
+	font-size:12px; 
+	border-top: 2px solid #ccc;
+	float: left;
+}
+
+.centerItemsDiv {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	word-wrap: break-word;
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.body {
+	font-size: 15px;
+}
+
+.bottom-line {
+	padding: 10px;
+	border-bottom: 2px solid #0f8794;
+}
+
+.mat-card {
+	max-height: 90vh;
+    overflow-y: auto;
+}
+
+.well {
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+a {
+	cursor: pointer;
+}

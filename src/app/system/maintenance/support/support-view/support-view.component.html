@@ -1,0 +1,26 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Preference Information</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+
+		<br><div>
+			<p><strong>Name:</strong> {{ supportName?.lastname }}, {{ supportName?.firstname }} {{ supportName?.middlename }}</p>
+			<mat-list>
+				<mat-divider></mat-divider>
+				<h3 mat-subheader>Categories	
+					<button type="button" mat-raised-button
+						matTooltip="Add category"  
+						(click)="openDialog()"><span class="fas fa-plus-square"></span>
+					</button>
+				</h3>
+
+				<mat-list-item *ngFor="let category of supportPreference;">
+						<button mat-icon-button color="warn" (click)="onDelete(category.Id)"><span class="fas fa-trash"></span></button>
+					    <h4 mat-line>{{ category?.Name }}</h4>
+				</mat-list-item>
+			</mat-list>
+		</div><br>
+
+	</mat-card-content>	
+</mat-card>

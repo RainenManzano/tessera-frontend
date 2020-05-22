@@ -1,0 +1,32 @@
+.toolbar-icon{
+	color:#ebebeb;
+	font-size:15px;
+}
+
+::ng-deep .popover {
+	min-width: 300px !important;
+	min-height: 0px !important;
+	max-width: 300px !important;
+	max-height: 450px !important;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+::ng-deep .mat-list-item {
+	height: auto !important;
+}
+
+::ng-deep .mat-list-item:hover {
+	background: #cecdcd !important;
+ 	cursor: pointer;
+}
+
+#notifContainer {
+	padding: 10px 0px 10px 0px;
+	font-size: 15px;
+	border-top: 1px solid black;
+}
+
+.new {
+	background: #cecdcd;
+}

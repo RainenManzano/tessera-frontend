@@ -1,0 +1,25 @@
+mat-card {
+	width: 28%;
+	float:left;
+	margin:10px	0px 10px 10px;
+}
+
+mat-card-content {
+	width: 100%;
+}
+
+textarea {
+	width: 100%;
+}
+
+button {
+	margin: 5px;
+}
+
+mat-form-field {
+	width: 100%;
+}
+
+mat-error {
+	font-size: 15px;
+}

@@ -1,0 +1,74 @@
+<h1 mat-dialog-title>Add User</h1>
+<form [formGroup]="userForm" (ngSubmit)="onAddUser()"> 
+<div mat-dialog-content>
+
+	<div formGroupName="idForm">
+
+		<mat-form-field class="col-md-6" appearance="outline">
+			<mat-label>Employee I.D.</mat-label>
+		   	<input matInput formControlName="empId"> 
+		   	<mat-error *ngIf="userForm.get('idForm.empId').hasError('idExists')">Employee I.D. is taken</mat-error>
+		   	<mat-error *ngIf="userForm.get('idForm.empId').hasError('required')">This field is required</mat-error>
+		</mat-form-field>
+
+		<mat-form-field class="col-md-6" appearance="outline">
+			<mat-label>Company Email</mat-label>
+		   	<input matInput formControlName="companyEmail"> 
+		   	<mat-error *ngIf="userForm.get('idForm.companyEmail').hasError('emailExists')">Email is taken</mat-error>
+		   	<mat-error *ngIf="userForm.get('idForm.companyEmail').hasError('required')">This field is required</mat-error>
+		   	<mat-error *ngIf="userForm.get('idForm.companyEmail').hasError('email')">Invalid email</mat-error>
+		</mat-form-field>
+	</div>
+
+	<div formGroupName="personalForm">
+	   	<mat-form-field class="col-md-4" appearance="outline">
+	  		<input matInput placeholder="Lastname" formControlName="lastname"> 
+	   	</mat-form-field>
+
+	   	<mat-form-field class="col-md-4" appearance="outline">
+	  		<input matInput placeholder="Firstname" formControlName="firstname"> 
+      	</mat-form-field>
+				      	
+		<mat-form-field class="col-md-4" appearance="outline">
+			<input matInput placeholder="Middlename" formControlName="middlename"> 
+		</mat-form-field>
+	</div>
+
+	<div formGroupName="companyForm">
+		<mat-form-field class="col-md-6" color="warn" appearance="outline">
+			<mat-label class="labelText">Department</mat-label>
+			<mat-select formControlName="department" (selectionChange)="onChangeDepartment()">
+				<mat-option
+					*ngFor="let department of departments"
+					[value]="department.Department_Id">{{ department?.Name}}</mat-option>
+			</mat-select>
+		</mat-form-field>
+
+		<mat-form-field class="col-md-6" color="warn" appearance="outline">
+			<mat-label class="labelText">Position</mat-label>
+			<mat-select formControlName="position">
+				<mat-option
+					*ngFor="let position of positions | positionFilter: selectedDept" 
+					[value]="position.Position_Id">{{ position?.Position_Name}}</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+
+	<div formGroupName="userType">
+		<mat-form-field class="col-md-12" color="warn" appearance="outline">
+			<mat-label class="labelText">User Type</mat-label>
+			<mat-select formControlName="role">
+				<mat-option value="0">Admin</mat-option>
+				<mat-option value="1">IT Head</mat-option>
+				<mat-option value="2">IT Staff</mat-option>
+				<mat-option value="3">Employee</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" >Cancel</button>
+  <button mat-button cdkFocusInitial type="submit" >Submit</button>
+</div>
+</form>

@@ -1,0 +1,42 @@
+<mat-card>
+	<div class="row">
+		<img [src]="userInfoImg" class="img-circle">
+	</div>
+	<mat-card-content>
+		<div class="col-md-12 title">
+        	<label>User Information</label>
+        </div>
+		<div class="container">
+			<p>
+				<strong><i class="fas fa-id-card"></i></strong>&nbsp;
+				{{ userInfo?.Employee_Id }}
+			</p>
+			<p>
+				<strong><i class="fas fa-user-tie"></i></strong>&nbsp;
+				{{ userInfo?.Lastname }}, {{ userInfo?.Firstname }} {{ userInfo?.Middlename }}.
+			</p>
+			<p>
+				<strong><i class="fas fa-envelope"></i></strong>&nbsp;
+				{{ userInfo?.Company_Email }}
+			</p>
+			<p>
+				<strong><i class="fas fa-building"></i></strong>&nbsp;
+				{{ userInfo?.Name }} Department
+			</p>
+			<p>
+				<strong><i class="fas fa-briefcase"></i></strong>&nbsp;
+				{{ userInfo?.Position_Name }}
+			</p>
+			<p><strong>Username: </strong>{{ userInfo?.Username }}</p>
+			<p><strong>Role: </strong>{{ userInfo?.Role | roleFilter }}</p>
+			<p>
+				<strong>Status: </strong>
+				<span [ngStyle]="{'color': statusColor(userInfo?.Status)}">{{ userInfo?.Status | statusFilter }}</span>
+			</p>
+		</div>
+		<button type="button" mat-raised-button class="pull-right" 
+			color="primary" matTooltip="Edit user"
+			(click)="onEdit()"><span class="fas fa-edit"></span>
+		</button>
+	</mat-card-content>	
+</mat-card>

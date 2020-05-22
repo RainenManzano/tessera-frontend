@@ -1,0 +1,14 @@
+<h1 mat-dialog-title style="width: 400px;">Reopen Ticket</h1>	
+<form [formGroup]="ticketReopenForm" (ngSubmit)="onReopenTicket()">
+	<mat-form-field class="form-field" appearance="outline">
+		<mat-label>State your reason</mat-label>
+		<textarea matInput formControlName="reason"></textarea>
+		<mat-error *ngIf="ticketReopenForm.get('reason').hasError('required')">
+		This field is required
+		</mat-error>
+	</mat-form-field>
+	<div mat-dialog-actions>
+		<button mat-button (click)="cancel()" class="pull-right" type="button">Cancel</button>
+		<button mat-button cdkFocusInitial type="submit" class="pull-right">Submit</button>
+	</div>
+</form>

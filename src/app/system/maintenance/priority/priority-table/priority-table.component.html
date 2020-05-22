@@ -1,0 +1,47 @@
+<mat-card>
+	<div class="container-header">
+		<h3 class="col-md-4">Priorities List</h3>
+		<button mat-raised-button 
+			class="col-md-2"
+			(click)="openDialog()">
+			Add Priority
+		</button>
+		<mat-form-field class="col-md-5" (keyup)="search($event.target.value)">
+			<mat-label><i class="fas fa-search"></i>&nbsp;Search</mat-label>
+			<input matInput >
+		</mat-form-field>
+	</div>
+
+	<mat-card-content>
+
+		<div class="mat-elevation-z8">
+			<table mat-table matSort [dataSource]="dataSource">
+
+				<ng-container matColumnDef="Level">
+				    <th mat-header-cell *matHeaderCellDef mat-sort-header> Level </th>
+				    <td mat-cell *matCellDef="let element"> {{element.Level}} </td>
+				</ng-container>
+
+				<ng-container matColumnDef="Days">
+				    <th mat-header-cell *matHeaderCellDef mat-sort-header> Duration </th>
+				    <td mat-cell *matCellDef="let element"> 
+				    	{{ priorityService.convertDuration(element.Days, element.Hours, element.Minutes) }}
+				    </td>
+				</ng-container>
+
+				<ng-container matColumnDef="Label">
+					<th mat-header-cell *matHeaderCellDef mat-sort-header> Label </th>
+				    <td mat-cell *matCellDef="let element"> {{element.Label}} </td>
+				</ng-container>
+
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row
+				*matRowDef="let row; columns: displayedColumns;"
+				[routerLink]="[row['Priority_Id']]"
+				routerLinkActive="table-highlight"></tr>
+			</table>
+			<mat-paginator [pageSizeOptions]="[10, 15, 20, 25, 100]" showFirstLastButtons></mat-paginator>
+		</div>
+
+	</mat-card-content>	
+</mat-card>

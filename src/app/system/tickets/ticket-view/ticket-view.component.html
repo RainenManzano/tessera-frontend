@@ -1,0 +1,168 @@
+<mat-card>
+	<mat-card-content>
+		<div class="box-container">
+
+        <div id="box-body">
+            <div class="col-md-12 bottom-line" style="text-align:center; margin-bottom: 10px;">
+              <label style="font-size:24px;">Ticket #{{ ticketInfo?.Ticket_Id }} Information</label>
+              <div>
+                <button type="button" mat-stroked-button
+                  color="primary" matTooltip="Audit Trail"
+                  (click)="openAuditTrail()"><span class="fas fa-shoe-prints"></span>
+                </button>
+                <!-- Edit of ticket Scope -->
+                <div *ngIf="role==0" style="display: inline-block;">
+                  <button type="button" mat-stroked-button
+                    color="primary" matTooltip="Edit ticket"
+                    (click)="onEdit()"><span class="fas fa-edit"></span>
+                  </button>
+                  <!-- Delete of ticket Scope -->
+                  <button type="button" mat-stroked-button
+                    color="warn" matTooltip="Delete ticket"
+                    (click)="onDelete()"><span class="fas fa-trash"></span>
+                  </button>
+                </div>
+                
+                <!-- Ticket Reassignment Scope -->
+                <div *ngIf="role==0 || role==1" style="display: inline-block;">
+                  <button type="button" mat-stroked-button
+                    *ngIf="ticketInfo?.Is_Reassign==1 && (ticketInfo?.Status=='Assigned' || ticketInfo?.Status=='Pending')"
+                    color="primary" (click)="onTicketReassigment()" 
+                    matTooltip="Reassign ticket">
+                    <i class="fas fa-paper-plane"></i>
+                  </button>
+                </div>
+
+                <!-- Request Reassignment Scope -->
+                <div *ngIf="role==1||role==2" style="display: inline-block;">
+                  <button type="button" mat-stroked-button 
+                    *ngIf="(ticketInfo?.Status=='Assigned') && isSupported==true"
+                    color="primary" (click)="openReassignmentDialog()" matTooltip="Request for Reassignment">
+                    <i class="fas fa-share-square"></i>
+                  </button>
+                </div>
+
+                <div *ngIf="role!=0" style="display: inline-block;">
+                  <!-- Reopen Ticket Scope -->
+                  <button type="button" mat-stroked-button color="primary"
+                    *ngIf="ticketInfo?.Status=='Resolved' && isIssued==true"
+                    (click)="openReopenDialog()"
+                    matTooltip="Reopen ticket">
+                      <i class="fas fa-unlock"></i>
+                  </button>
+                  <!-- Closing of ticket Scope -->
+                  <button type="button" mat-stroked-button color="warn"
+                    *ngIf="ticketInfo?.Status=='Resolved' && isIssued==true"
+                    (click)="openBottomSheet()" matTooltip="Close ticket">
+                      <i class="fas fa-lock"></i>
+                  </button>
+                </div>
+                <!-- END OF SCOPES -->
+              </div>
+            </div>
+            <div class="col-md-12" id="status" (click)="onStatusClicked()"
+              [ngStyle]="{'background': onChangeStatusColor(ticketInfo?.Status)}">
+              <span>{{ ticketInfo?.Status }}</span>
+            </div>
+            <div class="col-md-4" >
+              <span class="title">Date Created:&nbsp;</span><br>
+              <span class="body">{{ ticketInfo?.DateCreated }}</span>
+            </div>
+            <div class="col-md-4">
+              <span class="title">Date Modifed:&nbsp;</span><br>
+              <span class="body">{{ ticketInfo?.DateModified }}</span>
+            </div>
+            <div class="col-md-4">
+              <span class="title">Date Closed:&nbsp;</span><br>
+              <span class="body">{{ ticketInfo?.DateClosed }}</span>
+            </div>
+            <div class="col-md-12">
+              <span class="title">Issue:&nbsp;</span>
+              <span class="body">{{ ticketInfo?.IssueName }}</span>
+            </div>
+            <div class="col-md-12">
+              <span class="title">Description:&nbsp;</span>
+              <span class="body">{{ ticketInfo?.Description }}</span>
+            </div>
+            <div class="col-md-12">
+              <span class="title">Category:&nbsp;</span>
+             	<span class="body">{{ ticketInfo?.Name }}</span>
+           	</div>
+            <div class="col-md-12">
+          		<span class="title">Priority:&nbsp;</span>
+          		<span class="body">{{ ticketInfo?.Label }}</span>
+           	</div>
+            <div class="col-md-12">
+              <span class="title">Solution:&nbsp;</span>
+              <span class="body">{{ ticketInfo?.Solution }}</span>
+          	</div>
+            <div class="col-md-12" *ngIf="ticketInfo?.Reopen_Reason!=null">
+              <span class="title">Reason for reopening the ticket:&nbsp;</span>
+              <span class="body">{{ ticketInfo?.Reopen_Reason }}</span>
+            </div>
+            <div class="col-md-12" *ngIf="ticketInfo?.Is_Reassign==1">
+              <span class="title">Reason for reassigning the ticket:&nbsp;</span>
+              <span class="body">{{ ticketInfo?.Reassignment_Reason }}</span>
+            </div>
+        </div>
+
+        <div class="col-md-12" *ngIf="type=='view-supported-tickets' || type=='view-all-tickets'" style="margin-top: 10px;">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Requester Information
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p><i class="fas fa-user-tie"></i>&nbsp;&nbsp;{{ ticketInfo?.CreatedFirstname }} {{ ticketInfo?.CreatedMiddlename }} {{ ticketInfo?.CreatedLastname }}</p>
+              <p><i class="fas fa-envelope"></i>&nbsp;&nbsp;{{ ticketInfo?.CreatedEmail }}</p>
+              <p><i class="fas fa-briefcase"></i>&nbsp;&nbsp;{{ ticketInfo?.CreatedPosition }}</p>
+            </mat-expansion-panel>
+          </mat-accordion>  
+        </div>
+
+        <div class="col-md-12" style="margin-top:10px;" *ngIf="type=='view-issued-tickets' || type=='view-all-tickets' || isSupported==false">
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Support Information
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <p><i class="fas fa-user-tie"></i>&nbsp;&nbsp;{{ ticketInfo?.SupportedFirstname }} {{ ticketInfo?.SupportedMiddlename }} {{ ticketInfo?.SupportedLastname }}</p>
+              <p><i class="fas fa-envelope"></i>&nbsp;&nbsp;{{ ticketInfo?.SupportedEmail }}</p>
+              <p><i class="fas fa-briefcase"></i>&nbsp;&nbsp;{{ ticketInfo?.SupportedPosition }}</p>
+            </mat-expansion-panel>
+          </mat-accordion>  
+        </div>
+
+        <!-- Ticket Comments -->
+        <div id="box-body">
+         <div class="col-md-12 box-padding">
+            <div class="col-md-12 bottom-line" style="text-align:center; margin-bottom: 20px;">
+              <label style="font-size:15px;">Ticket Thread</label>
+            </div>
+            <div class="col-md-12">
+              <div class="well" *ngFor="let comment of ticketComments">
+                <div>
+                  <img [src]="location + comment?.Img_Name" class="img-circle" 
+                      style="border:3px solid #2a2c2c; width:40px; height: 40px;">
+                  <label>&nbsp;&nbsp; {{ comment?.Firstname }} {{ comment?.Middlename }} {{ comment?.Lastname }}</label>
+                  <span> ({{ comment?.DateCreated }})</span>   
+                </div>      
+                <hr style="border-top: 2px solid skyblue;"> 
+                <p style="color:black;">{{ comment?.Comment }}</p>  
+              </div>
+            </div>
+            <div class="col-md-12">
+              <form [formGroup]="commentForm" (ngSubmit)="onSubmitComment()">
+                <textarea type="text" class="form-control" placeholder="Add Comment.." rows="3" formControlName="comment"></textarea>
+                <button class="btn btn-info pull-right" style="margin-top:5px;" type="submit">Send</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+		</div>
+	</mat-card-content>	
+</mat-card>

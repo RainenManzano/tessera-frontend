@@ -1,0 +1,29 @@
+<img [src]="location+'login-background2.jpg'" id="backgroundImage">
+<div class="login-box">
+	<img [src]="location + 'tessera.png'" class="login-user clear"><br><br>
+	<form [formGroup]="signInForm" (ngSubmit)="onLogin()">
+
+		<mat-form-field class="input-box" color="primary" >
+			<span matPrefix class="labelColor"><i class="fa fa-user">&nbsp;&nbsp;</i></span>
+			<mat-label class="labelColor" >Username</mat-label>
+			<input type="text" matInput class="labelColor" formControlName="username">
+			<mat-error *ngIf="signInForm.get('username').invalid">{{getErrorUsername()}}</mat-error>
+		</mat-form-field>
+
+		<mat-form-field class="input-box" color="primary">
+			<span matPrefix class="labelColor"><i class="fa fa-lock">&nbsp;&nbsp;</i></span>
+			<mat-label class="labelColor">Password</mat-label>
+			<input type="password" matInput class="labelColor" formControlName="password">
+			<mat-error *ngIf="signInForm.get('password').invalid">{{ getErrorPassword() }}</mat-error>
+		</mat-form-field>
+		<p *ngIf="signInForm.hasError('invalidUP')==true && signInForm.get('username').hasError('required')==false && signInForm.get('password').hasError('required')==false">
+			Invalid username/password
+		</p>
+		<div class="layout-row">
+			<button type="submit" color="warn" mat-raised-button id="loginButton"  class="layout-flex">Login</button>
+			&nbsp;&nbsp;
+			<button type="button" mat-raised-button id="registerButton" [routerLink]="['/signup']" class="layout-flex">Register</button>
+		</div>
+		
+	</form>
+</div>

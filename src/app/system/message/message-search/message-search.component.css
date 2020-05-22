@@ -1,0 +1,14 @@
+mat-form-field {
+	width: 100%;
+}
+
+.mat-list-item {
+	padding: 10px;
+}
+
+.img-circle {
+	display:block; 
+	border:1px solid #2a2c2c; 
+	width:50px; 
+	height: 50px;
+}

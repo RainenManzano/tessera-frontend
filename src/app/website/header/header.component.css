@@ -1,0 +1,65 @@
+.container{
+	width:90%;
+	margin:auto;
+	overflow:hidden;
+}
+
+header{
+	background:#343535;
+	color:#fff;
+	padding-top:15px;
+	min-height:50px;
+	border-bottom: #df3f00 3px solid;
+	width:100%;
+}
+
+header a{
+	text-decoration:none;
+	color:#fff;
+	font-size:13.5px;	
+}
+
+header li{
+	display:inline;
+	padding-left:40px;
+	float:left;
+	margin-top:-5px;
+}
+
+header #branding{
+	font-size:20px;
+	color:#ebebeb;
+}
+
+header nav{
+	float:right;
+	margin-top:10px;
+}
+
+header .highlight{
+	color:#df3f00;
+}
+
+header a:hover{
+	color:#ccc;
+}
+
+header a:active{
+	color:#df3f00;
+}
+
+img {
+	float:left; 
+	width:13%; 
+	margin-top:-8px;
+}
+
+ul{
+	padding:0px;
+	margin:0px;
+}
+
+.current {
+	padding: 5px;
+	border-bottom: 2px solid #df3f00;
+}

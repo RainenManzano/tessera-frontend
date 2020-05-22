@@ -1,0 +1,30 @@
+<img id="supportImage" [src]="supportImage" class="img-circle">
+<h3 style="text-align: center;">{{ data.supporterName }}</h3>
+
+<div class="star-container">
+	<span (mouseenter)="changeStar('first')">
+		<i class="fa-star" [ngClass]="{'far' : first==0, 'fas': first==1}"></i>
+	</span>
+	<span (mouseenter)="changeStar('second')">
+		<i class="fa-star" [ngClass]="{'far' : second==0, 'fas': second==1}"></i>
+	</span>
+	<span (mouseenter)="changeStar('third')">
+		<i class="fa-star" [ngClass]="{'far' : third==0, 'fas': third==1}"></i>
+	</span>
+	<span (mouseenter)="changeStar('fourth')">
+		<i class="fa-star" [ngClass]="{'far' : fourth==0, 'fas': fourth==1}"></i>
+	</span>
+	<span (mouseenter)="changeStar('fifth')">
+		<i class="fa-star" [ngClass]="{'far' : fifth==0, 'fas': fifth==1}"></i>
+	</span>
+</div>
+
+<div style="text-align: center; margin: 30px;">
+	<h3>{{ performance }}</h3>
+</div>
+
+<div style="text-align: center;">
+	<button type="button" mat-stroked-button *ngIf="performance!='Rate me'" 
+		color="warn" (click)="closeTicket()">Close ticket
+	</button>
+</div>

@@ -1,0 +1,26 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Issue Information</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<div>
+			<p><strong>Issue ID:</strong> {{ issueInfo?.Issue_Id }}</p>
+			<p><strong>Issue: </strong>{{ issueInfo?.Issue }}</p>
+			<p><strong>Description: </strong></p>
+			<i>&nbsp;&nbsp;{{ issueInfo?.Description }}</i>
+			<p><strong>Category: </strong>{{ issueInfo?.Name }}</p>
+			<p><strong>Priority Level: </strong>{{ issueInfo?.Level }} - {{ issueInfo?.Label }}</p>
+			<p><strong>Duration: </strong>{{ issueInfo?.Days }} {{ issueInfo?.Hours }} {{ issueInfo?.Minutes }} </p>
+		</div><br>
+		<button type="button" mat-raised-button class="pull-right" 
+			color="warn" matTooltip="Delete issue"
+			(click)="onDelete()"><span class="fas fa-trash"></span>
+		</button>
+		<button type="button" mat-raised-button class="pull-right" 
+			color="primary" matTooltip="Edit issue"  
+			(click)="onEdit()"><span class="fas fa-edit"></span>
+		</button>
+		
+
+	</mat-card-content>	
+</mat-card>

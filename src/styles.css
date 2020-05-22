@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";*/
+/*@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";*/
+/*@import "~@angular/material/prebuilt-themes/purple-green.css";*/
+
+ngb-popover-window {
+     position: absolute;
+     width: auto !important;
+     display: block !important;
+     background-color: #fafafa !important;
+     border: 1px solid #fafafa !important;
+ }
+
+ .layout-row {
+ 	display: flex;
+ 	flex-direction: row;
+ }
+
+ .layout-column {
+ 	display: flex;
+ 	flex-direction: column;
+ }
+
+ .layout-flex {
+ 	flex: 1;
+ }
+
+ .between {
+	margin: 5px;
+}
+
+ .table-highlight {
+ 	background-color: #cecdcd;
+ }
+
+section.ticket-list:hover {
+	background: #cecdcd !important;
+ 	cursor: pointer;
+}
+
+ tr.mat-row:hover {
+ 	background-color: #cecdcd;
+ 	cursor: pointer;
+ }
+
+ .mat-tooltip {
+ 	font-size: 16px;
+ }
+
+ .text-blue {
+    color: #4e73df !important; 
+}
+
+.text-green {
+    color: #1cc88a !important;
+}
+
+.text-sky {
+    color: #36b9cc !important;;
+}
+
+.text-indigo {
+    color: #6610f2 !important;
+}
+
+.text-purple {
+    color: #6f42c1 !important;
+}
+
+.text-pink {
+    color: #e83e8c !important;
+}
+
+.text-yellow {
+    color: #f6c23e !important;
+}
+
+.font-custom {
+    font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+.mat-card {
+    font-family: Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}

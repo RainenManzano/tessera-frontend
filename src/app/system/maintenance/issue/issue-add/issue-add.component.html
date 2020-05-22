@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Add Issue</h1>
+<form [formGroup]="issueForm" (ngSubmit)="onAddIssue()"> 
+	<div mat-dialog-content>
+
+		<mat-form-field>
+		    <mat-select placeholder="Category" formControlName="category">
+		    	<mat-option *ngFor="let category of categories" [value]="category.Category_Id">
+		    		{{ category.Name }}
+		    	</mat-option>
+		    </mat-select>
+		    <mat-error>Field is required</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+		    <mat-select placeholder="Priority" formControlName="priority">
+		    	<mat-option *ngFor="let priority of priorities" [value]="priority.Priority_Id">
+		    		{{ priority.Level }}
+		    	</mat-option>
+		    </mat-select>
+		    <mat-error>Field is required</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+		    <input matInput placeholder="Issue" formControlName="issue"> 
+		    <mat-error *ngIf="this.issueForm.get('issue').hasError('required')">Field is required</mat-error>
+		</mat-form-field>
+
+		<mat-form-field>
+			<mat-label>Description</mat-label>
+			<textarea formControlName="description" matInput></textarea>
+		</mat-form-field>
+
+	</div>
+
+	<div mat-dialog-actions>
+		<button mat-button (click)="cancel()">Cancel</button>
+		<button mat-button cdkFocusInitial type="submit">Ok</button>
+	</div>
+
+</form>

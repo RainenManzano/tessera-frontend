@@ -1,0 +1,18 @@
+<ng-template #searchContent>
+	<span style="display:block; text-align: center;"><i class="fas fa-search"></i>&nbsp;Search</span>
+	<mat-list>
+		<mat-list-item *ngFor="let user of users" [routerLink]="[user?.User_Id]">
+			<img [src]="location+user?.Img_Name" class="img-circle">&nbsp;&nbsp;
+			<div class="col-md-8">
+				<p class="col-md-12" style="margin: 0px; font-size: 14px;">{{ user?.Firstname }} {{ user?.Lastname }}</p>
+		    	<i class="col-md-12" style="margin: 0px; font-size: 14px;"> {{ user?.Position_Name }} </i>
+			</div>
+		</mat-list-item>
+	</mat-list>
+</ng-template>
+
+<mat-form-field appearance="outline" [ngbPopover]="searchContent" [autoClose]="false">
+	<mat-label>Search</mat-label>
+	<input matInput #search 
+		(keyup)="searchTicket($event.target.value)" (click)="searchTicket($event.target.value)">
+</mat-form-field>

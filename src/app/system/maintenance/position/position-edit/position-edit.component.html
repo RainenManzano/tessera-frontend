@@ -1,0 +1,41 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Edit Position</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<form [formGroup]="positionForm" (ngSubmit)="onSubmit()">
+
+			<mat-form-field>
+				<mat-label>Name</mat-label>
+				<input type="text" formControlName="name" matInput>
+				<mat-error>This field is required</mat-error>
+			</mat-form-field><br><br>
+			
+
+			<mat-form-field>
+				<mat-label>Description</mat-label>
+				<textarea formControlName="description" matInput>
+				</textarea>
+			</mat-form-field><br><br>
+			
+			<mat-form-field>
+				<mat-label>Department</mat-label>
+				<mat-select formControlName="department">
+					<mat-option *ngFor="let department of departments"
+						[value]="department.Department_Id">{{ department.Name }}</mat-option>
+				</mat-select>
+				<mat-error>Field is required</mat-error>
+			</mat-form-field><br><br>
+			
+			<button type="submit" 
+				mat-raised-button 
+				color="primary" 
+				class="pull-right">Save</button>
+			<button type="button" 
+				mat-raised-button 
+				color="warn" 
+				class="pull-right"
+				(click)="onCancel()">Cancel</button>
+		</form>
+	</mat-card-content>	
+</mat-card>

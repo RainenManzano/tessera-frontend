@@ -1,0 +1,95 @@
+<mat-card>
+	<div style="display: flex; flex-direction: row;">
+		<span class="col-md-5" id="headerText">{{ title }}</span>
+		<button mat-raised-button (click)="openDialog()" class="col-md-2 buttonModification">Add Ticket</button>
+		<mat-form-field class="col-md-4">
+			<mat-label>Filter</mat-label>
+			<mat-select [value]="activeStatus" id="filter">
+				<mat-option *ngFor="let status of listOfStatus" [value]="status" (click)="onStatusChange($event.target.textContent)">{{status}}</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<button mat-mini-fab  [ngbPopover]="searchContent" [autoClose]="false"
+			class="col-md-1 buttonModification" style="background: #e0dfdf;"><i class="fas fa-search"></i></button>
+	</div>
+	<mat-card-content>
+
+			<section *ngFor="let ticket of ticketsObservable | async " 
+			[routerLink]="[ticket.Ticket_Id]"
+			routerLinkActive="table-highlight"
+			queryParamsHandling="preserve"
+			class="ticket-list"
+			style="margin:5px;">
+	    		<div class="box box-primary" style="border:solid 1px #8b8b8b; border-radius:5px;">
+
+	          		<div class="box-body" style="border-bottom: 1px solid black;">
+	            		<div class="row">
+	              			<div class="col-md-2">
+				                <div class="col-md-12" style="word-wrap: break-word; padding: 0">
+				                	<span style="display: flex; justify-content: center;">{{ ticket.Ticket_Id }}</span>
+				                </div>
+		                		<div class="col-md-12" [ngStyle]="{'background': colorCheck(ticket.Status)}">
+		                  			<span style=" color:#ebebeb; margin:auto; display: flex; justify-content: center;">
+		                  				{{ ticket?.Status }}
+		                  			</span>
+	                			</div>
+	              			</div>
+				            <div class="col-md-6">
+				            	<h4>{{ ticket?.IssueName }}</h4>
+				            </div>
+	              			<div class="col-md-4">
+				                <label style="font-weight:300;">Last updated: &nbsp;</label>
+				                <span class="label label-default">{{ ticket?.lastUpdated }} ago</span>
+				                <br>
+				                <label style="font-weight:300;">Created at &nbsp;</label>
+				                <span class="label label-default">{{ ticket?.DateCreated }}</span>
+	              			</div>
+	            		</div>
+	          		</div>
+	          		<div class="box-footer" style="padding:0.5px;">
+	            		<div class="row no-pad">
+
+	              			<div class="col-md-3 center" *ngIf="ticketType=='view-issued-tickets' || ticketType=='view-all-tickets'">
+	                  			<div style="font-weight: 700; ">Assigned Support</div>
+	                  			<span>
+	                  				{{ ticket?.SupportedFirstname }} {{ ticket?.SupportedMiddlename }} {{ ticket?.SupportedLastname }}
+	                  			</span>
+	              			</div>
+	              			<!-- datecreated, rating, scheduled date, time, iswithin -->
+			              	<div class="col-md-3 center" *ngIf="ticketType=='view-supported-tickets' || ticketType=='view-all-tickets'">
+				                <div style="font-weight: 700;">Raised by:</div>
+				                <span>{{ ticket?.CreatedFirstname }} {{ ticket?.CreatedMiddlename }} {{ ticket?.CreatedLastname }}</span>
+			              	</div>
+
+	              			<div class="col-md-2 center">
+	                			<div style="font-weight: 700;">Priority</div>
+	                			<span>{{ ticket?.Label }}</span>
+	              			</div>
+
+	              			<div class="col-md-2 center">
+	                			<div style="font-weight: 700;">Category</div>
+	                			<span>{{ ticket?.Name }}</span>
+	              			</div>
+
+	              			<div class="col-md-2 center" *ngIf="ticket.Status=='Open' || ticket.Status!='Assigned'">
+	                			<span>
+	                				<span [ngClass]="{'fa fa-circle text-success': ticket.isWithin==1, 'fas fa-exclamation-triangle text-danger': ticket.isWithin==0}"></span>
+	                				{{ ticket?.time }}
+	                			</span>
+	              			</div>
+
+	            		</div>
+	          		</div>
+
+	        	</div>
+	      	</section>
+	      	<mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons></mat-paginator>
+	</mat-card-content>	
+</mat-card>
+
+<ng-template #searchContent>
+	<mat-form-field appearance="outline">
+		<mat-label>Search</mat-label>
+		<input matInput #searchElement [value]="searchString"
+			(keyup)="searchTicket($event.target.value)" (click)="searchTicket($event.target.value)">
+	</mat-form-field>
+</ng-template>

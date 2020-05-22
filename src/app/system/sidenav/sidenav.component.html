@@ -1,0 +1,134 @@
+<mat-drawer-container class="side-nav-container" autosize >
+
+	<mat-drawer #drawer class="sidenav" mode="side" opened>
+		<div id="companyImageContainer">
+			<img src="./../../../assets/images/company.jpg" id="companyImage">
+		</div>
+		<mat-list>
+
+			<div>
+              <img [src]="userInfoImg" class="img-circle" 
+                  style="display:block; margin-left:auto; margin-right:auto; border:6px solid #2a2c2c; width:100px; height: 100px;">
+            </div>
+			<div  style="padding:15px; text-align: center;">
+				<p style="font-size:15px; color: white;">{{ userInfo?.Firstname }} {{ userInfo?.Middlename }} {{ userInfo?.Lastname }}</p>
+				<span style="color:white;">
+					<i class="fa fa-user" style="color:#5ed63d"></i> 
+					{{ userInfo?.Position_Name }}
+				</span>
+			</div>
+			
+			<!-- DASHBOARD Links -->
+			<mat-list-item class="links" 
+				[routerLink]="['dashboard']"
+				routerLinkActive="activeLink">
+				<span class="icon-blue fas fa-tachometer-alt">&nbsp;&nbsp;&nbsp;</span>
+				<span class="menu-list" >Dashboard</span>
+			</mat-list-item>
+
+			<!-- TICKETS Links -->
+			<mat-list-item class="links" (click)="ticketIsClicked = !ticketIsClicked">
+				<span class="fas fa-ticket-alt icon-red">&nbsp;&nbsp;&nbsp;</span>
+				<span class="menu-list" >Tickets&nbsp;&nbsp;&nbsp;</span>
+				<span class="whiteColor fas"
+				[ngClass]="{ 
+				'fa-caret-right':ticketIsClicked==false, 
+				'fa-caret-down':ticketIsClicked==true }">&nbsp;&nbsp;&nbsp;</span>
+			</mat-list-item>
+
+			<ng-container *ngIf="role==0 || role==1">
+				<div *ngIf="ticketIsClicked; ">
+					<mat-list-item class="links" [@fadeInOut]
+						[routerLink]="['tickets']"
+						[queryParams]="{type:'view-all-tickets'}"
+						routerLinkActive="activeLink">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span class="fas fa-circle-notch icon-red">&nbsp;&nbsp;</span>
+						<span class="menu-list" >All Tickets</span>
+					</mat-list-item>
+				</div>
+			</ng-container>
+			
+			<ng-container *ngIf="role==0 || role==1 || role==2 || role==3">
+				<div *ngIf="ticketIsClicked; ">
+					<mat-list-item class="links" [@fadeInOut]
+						[routerLink]="['tickets']"
+						[queryParams]="{type:'view-issued-tickets'}"
+						routerLinkActive="activeLink">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span class="fas fa-circle-notch icon-red">&nbsp;&nbsp;</span>
+						<span class="menu-list" >Issued Tickets</span>
+					</mat-list-item>
+				</div>
+			</ng-container>
+
+			<ng-container *ngIf="role==0 || role==1 || role==2">
+				<div *ngIf="ticketIsClicked; ">
+					<mat-list-item class="links" [@fadeInOut]
+						[routerLink]="['tickets']"
+						[queryParams]="{type:'view-supported-tickets'}"
+						routerLinkActive="activeLink">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span class="fas fa-circle-notch icon-red">&nbsp;&nbsp;</span>
+						<span class="menu-list" >Supported Tickets</span>
+					</mat-list-item>
+				</div>
+			</ng-container>
+
+			<!-- MENU Links -->
+			<mat-list-item class="links" 
+				*ngFor="let menu of menus" 
+				[routerLink]="[menu.path]"
+				routerLinkActive="activeLink">
+				<span [class]="menu.icon+' '+menu.class">&nbsp;&nbsp;&nbsp;</span>
+				<span class="menu-list" >{{menu.title}}</span>
+			</mat-list-item>
+
+			<!-- Maintenance Links -->
+			<mat-list-item class="links" (click)="maintenanceIsClicked = !maintenanceIsClicked" *ngIf="role==0">
+				<span class="fas fa-wrench icon-yellow">&nbsp;&nbsp;&nbsp;</span>
+				<span class="menu-list" >Maintenance&nbsp;&nbsp;&nbsp;</span>
+				<span class="whiteColor fas"
+				[ngClass]="{ 
+				'fa-caret-right':maintenanceIsClicked==false, 
+				'fa-caret-down':maintenanceIsClicked==true }">&nbsp;&nbsp;&nbsp;</span>
+			</mat-list-item>
+			<ng-container *ngIf="maintenanceIsClicked==true &&  role==0">
+				<mat-list-item class="links" [@fadeInOut]
+					*ngFor="let maintenance of maintenanceTree" 	
+					[routerLink]="[maintenance.path]"
+					routerLinkActive="activeLink">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span [class]="maintenance.icon+' '+maintenance.class">&nbsp;&nbsp;</span>
+					<span class="menu-list" >{{maintenance.title}}</span>
+				</mat-list-item>
+			</ng-container>
+
+			<mat-list-item class="links" (click)="backupDatabase()" *ngIf="role==0">
+				<span class="fas fa-database" style="color: green;">&nbsp;&nbsp;&nbsp;</span>
+				<span class="menu-list" >Backup Database</span>
+			</mat-list-item>
+
+		</mat-list>
+	</mat-drawer>
+
+
+<!---------------------- Toolbar ------------------>
+	<div id="parent">
+		<mat-toolbar id="toolbar">
+				<button type="button" mat-button (click)="drawer.toggle()">
+					<span class="fa fa-bars toolbar-icon"></span>
+				</button>
+				<span class="spacer"></span>
+
+				<button [routerLink]="['message']"
+					type="button" mat-button 
+					style="padding-top: 5px;">
+					<i class="far fa-envelope toolbar-icon"></i>
+					<!-- <span matBadge="25" matBadgeOverlap="false" matBadgeColor="warn"></span> -->
+				</button>
+
+				<notification></notification>
+				<profile></profile>
+		</mat-toolbar>
+
+		<router-outlet></router-outlet>
+	</div>
+
+</mat-drawer-container>

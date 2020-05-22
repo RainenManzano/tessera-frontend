@@ -1,0 +1,17 @@
+<header>
+	<div class="container">
+		<div id="branding">
+			<img [src]="location + 'tessera.png'">
+		</div>
+		<nav>
+			<ul>
+				<li *ngFor="let menu of menus" >
+					<a routerLinkActive="current" 
+					[routerLink]="['/'+menu.path]">
+						{{ menu.title }}
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>

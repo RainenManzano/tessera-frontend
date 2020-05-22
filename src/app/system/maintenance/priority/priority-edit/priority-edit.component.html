@@ -1,0 +1,66 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Edit Priority</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<form [formGroup]="priorityForm" (ngSubmit)="onSubmit()">
+
+			<mat-form-field>
+				<mat-label>Level</mat-label>
+				<input type="text" formControlName="level" matInput>
+				<mat-error *ngIf="priorityForm.get('level').hasError('required')">This field is required</mat-error>
+				<mat-error *ngIf="priorityForm.get('level').hasError('levelExists')">Level exists</mat-error>
+			</mat-form-field>
+			<br>
+
+			<mat-form-field>
+				<mat-label>Label</mat-label>
+				<input type="text" formControlName="label" matInput>
+				<mat-error *ngIf="priorityForm.get('label').hasError('required')">This field is required</mat-error>
+				<mat-error *ngIf="priorityForm.get('label').hasError('labelExists')">Label exists</mat-error>
+			</mat-form-field>
+			<br>
+
+			<mat-form-field>
+				<mat-label>Days</mat-label>
+				<input type="text" formControlName="days" matInput>
+			</mat-form-field>
+			<br>
+
+			<span class="label">Hours:</span>
+			<mat-slider
+				thumbLabel
+				tickInterval="1000"
+				min="0"
+				max="24"
+				formControlName="hours"
+				#hoursReference>
+			</mat-slider>
+			<span class="pull-right">Value: {{ hoursReference.value }}</span>
+			<br>
+
+			<span class="label">Minutes:</span>
+			<mat-slider
+				thumbLabel
+				tickInterval="1000"
+				min="1"
+				max="60"
+				formControlName="minutes"
+				#minutesReference>
+			</mat-slider>
+			<span class="pull-right">Value: {{ minutesReference.value }}</span>
+			<br><br>
+
+			<button type="submit" 
+				mat-raised-button 
+				color="primary" 
+				class="pull-right">Save</button>
+			<button type="button" 
+				mat-raised-button 
+				color="warn" 
+				class="pull-right"
+				(click)="onCancel()">Cancel</button>
+
+		</form>
+	</mat-card-content>	
+</mat-card>

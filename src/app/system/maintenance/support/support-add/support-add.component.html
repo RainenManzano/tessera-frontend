@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Add Category Preference</h1>
+<form [formGroup]="preferenceForm" (ngSubmit)="onAddPreference()"> 
+<div mat-dialog-content>
+
+	<mat-form-field>
+	    <mat-label>Category</mat-label>
+	    <mat-select formControlName="category">
+	    	<mat-option *ngFor="let category of categories"
+	    		[value]="category.Category_Id">{{ category.Name }}</mat-option>
+	    </mat-select>
+	    <mat-error>Field is required</mat-error>
+	</mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button cdkFocusInitial type="submit">Ok</button>
+</div>
+</form>

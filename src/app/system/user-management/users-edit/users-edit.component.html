@@ -1,0 +1,73 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+	<mat-card>
+		<div class="col-md-12 title">
+	        <label>Edit User Information</label>
+	    </div>
+	    <div class="col-md-12" style="text-align: center;">
+	        <mat-checkbox color="primary" formControlName="status">Active</mat-checkbox>
+	    </div>
+		<mat-card-content>
+			<mat-form-field appearance="outline" class="col-md-6">
+				<mat-label>Role</mat-label>
+				<mat-select formControlName="role">
+					<mat-option value="0">Admin</mat-option>
+					<mat-option value="1">IT Head</mat-option>
+					<mat-option value="2">IT Staff</mat-option>
+					<mat-option value="3">Employee</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field appearance="outline" class="col-md-6">
+				<mat-label>Employee ID</mat-label>
+				<input type="text" formControlName="empId" matInput>
+				<mat-error>This field is required</mat-error>
+			</mat-form-field>
+			<mat-form-field appearance="outline" class="col-md-12">
+				<mat-label>Lastname</mat-label>
+				<input type="text" formControlName="lastname" matInput>
+			</mat-form-field>
+			<mat-form-field appearance="outline" class="col-md-12">
+				<mat-label>Firstname</mat-label>
+				<input type="text" formControlName="firstname" matInput>
+			</mat-form-field>
+			<mat-form-field appearance="outline" class="col-md-12">
+				<mat-label>Middlename</mat-label>
+				<input type="text" formControlName="middlename" matInput>
+			</mat-form-field>
+			<mat-form-field appearance="outline" class="col-md-12"> 
+				<mat-label>Email</mat-label>
+				<input type="text" formControlName="email" matInput>
+				<mat-error>This field is required</mat-error>
+			</mat-form-field>
+			<mat-form-field appearance="outline" class="col-md-6">
+				<mat-label>Department</mat-label>
+				<mat-select formControlName="department" (selectionChange)="onSelectDepartment($event.value)">
+					<mat-option 
+						*ngFor="let department of departments"
+						[value]="department.Department_Id">{{ department.Name }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field appearance="outline" class="col-md-6">
+				<mat-label>Position</mat-label>
+				<mat-select formControlName="position">
+					<mat-option *ngFor="let position of positions | positionFilter:selectedDepartment"
+						[value]="position.Position_Id">{{ position.Position_Name }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+			<mat-form-field appearance="outline" class="col-md-12">
+				<mat-label>Username</mat-label>
+				<input type="text" formControlName="username" matInput>
+			</mat-form-field>
+			<button type="submit" 
+				mat-raised-button 
+				color="primary" 
+				class="pull-right">Save</button>
+			<button type="button" 
+				mat-raised-button 
+				color="warn" 
+				class="pull-right"
+				(click)="onCancel()">Cancel</button>
+		</mat-card-content>	
+	</mat-card>
+</form>

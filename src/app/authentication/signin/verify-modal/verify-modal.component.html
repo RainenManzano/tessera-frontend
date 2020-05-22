@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Code Verification</h1>
+<form [formGroup]="verificationForm" (ngSubmit)="onSubmit()"> 
+	<div mat-dialog-content>
+		<p>Your account is still not activated, please provide the verification code that has been sent to 
+			<a>{{ email }}</a>.
+		</p>
+		<mat-form-field>
+			<mat-label>Enter code</mat-label>
+			<input matInput formControlName="code">
+			<mat-error>Field is required</mat-error>
+		</mat-form-field>
+
+		<a (click)="resendCode()">Resend code</a>&nbsp;&nbsp;&nbsp;
+		<a (click)="openEmailDialog()">Change Email address</a>&nbsp;&nbsp;&nbsp;
+
+	</div>
+	<div mat-dialog-actions align="end">
+	  <button mat-button (click)="cancel()" class="pull-right">Cancel</button>
+	  <button mat-button cdkFocusInitial type="submit" class="pull-right">Ok</button>
+	</div>
+</form>

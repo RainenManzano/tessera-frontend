@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>Update Ticket Status</h1>
+
+<form [formGroup]="statusForm" (ngSubmit)="onUpdateTicketStatus()"> 
+	<div mat-dialog-content>
+		<mat-form-field class="form-field" appearance="outline">
+			<mat-label>Status</mat-label>
+		   	<mat-select formControlName="status" (selectionChange)="onStatusChange($event.value)">
+		   		<mat-option value="Open">Open</mat-option>
+		   		<mat-option value="Assigned">Assigned</mat-option>
+		   		<mat-option value="Resolved">Resolved</mat-option>
+		   	</mat-select>
+		</mat-form-field>
+		<mat-form-field class="form-field" appearance="outline" >
+			<mat-label>Solution</mat-label>
+			<textarea matInput formControlName="solution"></textarea>
+			<mat-error *ngIf="statusForm.get('solution').hasError('required')">This field is required</mat-error>
+		</mat-form-field>
+	</div>
+
+	<div mat-dialog-actions>
+	  <button mat-button (click)="cancel()" class="pull-right" type="button">Cancel</button>
+	  <button mat-button cdkFocusInitial type="submit" class="pull-right">Update</button>
+	</div>
+</form>

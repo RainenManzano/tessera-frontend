@@ -1,0 +1,57 @@
+<form [formGroup]="accountForm" (ngSubmit)="onSubmitAccountForm()">
+	<mat-expansion-panel>
+		<mat-expansion-panel-header>
+			<mat-panel-title> Account Settings </mat-panel-title>
+			<mat-panel-description>
+				Update username and password
+			</mat-panel-description>
+			<span class="pull-right" style="margin-right: 10px;"><i class="fas fa-wrench"></i></span>
+	    </mat-expansion-panel-header>
+	    <div class="row">
+	    	<mat-form-field appearance="outline" class="col-md-9">
+		    	<mat-label>Username</mat-label>
+				<input matInput formControlName="username">
+				<mat-error *ngIf="accountForm.get('username').hasError('usernameExists')">Username already exists</mat-error>
+		    </mat-form-field>
+		    <button mat-stroked-button color="primary" class="col-md-1 change" type="button"
+			    	(click)="enableAccountForm(['username'])" *ngIf="cancelUsername==false">
+			    	<i class="fa fa-edit"></i>
+			</button>
+			<button mat-stroked-button color="warn" class="col-md-2 change" type="button"
+		    	(click)="disableAccountForm(['username'])" *ngIf="cancelUsername==true">
+		    	Cancel
+		    </button>
+	    </div>
+	    <div class="row">
+	    	<mat-form-field appearance="outline" class="col-md-3">
+		    	<mat-label>Current Password</mat-label>
+				<input matInput formControlName="currentpassword" type="password">
+				<mat-error *ngIf="accountForm.get('currentpassword').hasError('passwordNotSame')">
+					Does not match to your current password
+				</mat-error>
+		    </mat-form-field>
+		    <mat-form-field appearance="outline" class="col-md-3">
+		    	<mat-label>New Password</mat-label>
+				<input matInput formControlName="newpassword" type="password">
+		    </mat-form-field>
+		    <mat-form-field appearance="outline" class="col-md-3">
+		    	<mat-label>Confirm Password</mat-label>
+				<input matInput formControlName="confirmpassword" type="password">
+				<mat-error *ngIf="accountForm.get('confirmpassword').hasError('errorConfirm')">
+					Does not match to your new password
+				</mat-error>
+		    </mat-form-field>
+		    <button mat-stroked-button color="primary" class="col-md-1 change" type="button"
+			    	(click)="enableAccountForm(['confirmpassword', 'newpassword', 'currentpassword'])" *ngIf="cancelPassword==false">
+			    	<i class="fa fa-edit"></i>
+			</button>
+			<button mat-stroked-button color="warn" class="col-md-2 change" type="button"
+		    	(click)="disableAccountForm(['confirmpassword', 'newpassword', 'currentpassword'])" *ngIf="cancelPassword==true">
+		    	Cancel
+		    </button>
+	    </div>
+	    <mat-action-row>
+			<button mat-button color="primary" type="submit">Save</button>
+	    </mat-action-row>
+	</mat-expansion-panel>
+</form>

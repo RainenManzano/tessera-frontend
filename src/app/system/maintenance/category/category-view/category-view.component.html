@@ -1,0 +1,23 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Category Information</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<div>
+			<p><strong>Category ID:</strong> {{ categoryInfo?.Category_Id }}</p>
+			<p><strong>Name: </strong>{{ categoryInfo?.Name }}</p>
+			<p><strong>Description: </strong></p>
+			<i>&nbsp;&nbsp;{{ categoryInfo?.Description }}</i>
+		</div><br>
+		<button type="button" mat-raised-button class="pull-right" 
+			color="warn" matTooltip="Delete category"
+			(click)="onDelete()"><span class="fas fa-trash"></span>
+		</button>
+		<button type="button" mat-raised-button class="pull-right" 
+			color="primary" matTooltip="Edit category"  
+			(click)="onEdit()"><span class="fas fa-edit"></span>
+		</button>
+		
+
+	</mat-card-content>	
+</mat-card>

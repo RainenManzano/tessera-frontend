@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Add Ticket</h1>	
+
+<mat-form-field style="width:50%;" appearance="outline">
+	<mat-select (selectionChange)="onSelectCategory($event)" placeholder="Sort By Category" >
+		<mat-option *ngFor="let category of categories" 
+		[matTooltip]="category.Description"
+	    matTooltipPosition="right"
+	   	[value]="category.Category_Id">
+	   		{{ category.Name }}	 
+	   	</mat-option>
+	</mat-select>
+</mat-form-field>
+
+<form [formGroup]="ticketForm" (ngSubmit)="onAddTicket()"> 
+	<div mat-dialog-content>
+		<mat-form-field class="form-field" appearance="outline">
+			<mat-label>Issue</mat-label>
+		   	<mat-select formControlName="issue">
+		   		<mat-option *ngFor="let issue of issues | categoryIssueFilter: category" (click)="onSelectIssue(issue)"
+		   		[value]="issue.Issue_Id"
+		   		[matTooltip]="issue.Description"
+		   		matTooltipClass = "matToolTip"
+	        	matTooltipPosition="right">
+		   			{{ issue.Issue }}
+		   		</mat-option>
+		   	</mat-select>
+		</mat-form-field>
+
+		<mat-form-field class="form-field" appearance="outline">
+			<mat-label>Description</mat-label>
+			<textarea matInput formControlName="description"></textarea>
+		</mat-form-field>
+	</div>
+
+	<div mat-dialog-actions>
+	  <button mat-button (click)="cancel()" class="pull-right" type="button">Cancel</button>
+	  <button mat-button cdkFocusInitial type="submit" class="pull-right">Ok</button>
+	</div>
+</form>

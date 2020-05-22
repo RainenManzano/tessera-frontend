@@ -1,0 +1,21 @@
+mat-list {
+	padding: 0px;
+}
+
+.mat-list-item {
+	padding: 10px;
+    border: 1px solid grey;
+}
+
+.mat-list-base {
+	overflow-y: scroll;
+    min-height: 80vh;
+    max-height: 80vh;
+}
+
+.img-circle {
+	display:block; 
+	border:1px solid #2a2c2c; 
+	width:50px; 
+	height: 50px;
+}

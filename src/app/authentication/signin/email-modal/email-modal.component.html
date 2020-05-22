@@ -1,0 +1,15 @@
+<h1 mat-dialog-title style="width: 400px;">Change Email Address</h1>
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()"> 
+	<mat-form-field>
+		<mat-label>Enter email</mat-label>
+		<input matInput formControlName="email">
+		<mat-error *ngIf="emailForm.get('email').hasError('required')">Field is required</mat-error>
+		<mat-error *ngIf="emailForm.get('email').hasError('email')">Email is invalid</mat-error>
+		<mat-error *ngIf="emailForm.get('email').hasError('emailExists')">Email is taken</mat-error>
+	</mat-form-field>
+
+	<div mat-dialog-actions align="end">
+	  <button mat-button type="button" (click)="cancel()" class="pull-right">Cancel</button>
+	  <button mat-button cdkFocusInitial type="submit" class="pull-right">Ok</button>
+	</div>
+</form>

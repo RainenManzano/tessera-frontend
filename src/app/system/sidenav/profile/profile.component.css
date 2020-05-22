@@ -1,0 +1,23 @@
+.toolbar-icon{
+	color:#ebebeb;
+	font-size:15px;
+}
+
+::ng-deep .popover {
+	min-width: 260px !important;
+	min-height: 0px !important;
+	max-width: 300px !important;
+	max-height: 450px !important;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.img-container {
+	background: #343535;
+    min-width: 260px !important;
+    min-height: 150px !important;
+}
+
+a {
+	margin: 5px;
+}

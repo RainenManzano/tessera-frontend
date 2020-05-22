@@ -1,0 +1,130 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Edit Ticket</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+
+			<div class="layout-row">
+				<mat-form-field class="layout-flex between">
+					<mat-label>Created By</mat-label>
+					<mat-select formControlName="createdBy">
+						<mat-option *ngFor="let user of users"
+							[value]="user.User_Id">
+							{{ user.Firstname }} {{ user.Lastname }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+				<mat-form-field class="layout-flex between">
+					<mat-label>Supported By</mat-label>
+					<mat-select formControlName="supportedBy">
+						<mat-option *ngFor="let user of usersSupport"
+							[value]="user.User_Id">
+							{{ user.Firstname }} {{ user.Lastname }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+
+			<div class="layout-row">
+				<mat-form-field class="between">
+					<mat-label>Status</mat-label>
+					<mat-select formControlName="status" (selectionChange)="onTicketStatusChanged($event)">
+						<mat-option value="Open">
+							Open
+						</mat-option>
+						<mat-option value="Closed">
+							Closed
+						</mat-option>
+						<mat-option value="Pending">
+							Pending
+						</mat-option>
+						<mat-option value="Assigned">
+							Assigned
+						</mat-option>
+						<mat-option value="Resolved">
+							Resolved
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+
+			<div class="layout-row">
+				<mat-form-field class="layout-flex between">
+					<mat-select (selectionChange)="onSelectCategory($event)" placeholder="Sort Issue By Category" >
+						<mat-option *ngFor="let category of categories" 
+						[matTooltip]="category.Description"
+					    matTooltipPosition="right"
+					   	[value]="category.Category_Id">
+					   		{{ category.Name }}	 
+					   	</mat-option>
+					</mat-select>
+				</mat-form-field>	
+
+				<mat-form-field class="layout-flex between">
+					<mat-label>Issue</mat-label>
+				   	<mat-select formControlName="issue">
+				   		<mat-option *ngFor="let issue of issues | categoryIssueFilter: selectedCategory" 
+				   		[value]="issue.Issue_Id"
+				   		[matTooltip]="issue.Description + '\nPriority Level: ' + issue.Level"
+				   		matTooltipClass = "matToolTip"
+			        	matTooltipPosition="left">
+				   			{{ issue.Issue }}
+				   		</mat-option>
+				   	</mat-select>
+				</mat-form-field>
+			</div>
+
+			<mat-form-field>
+				<mat-label>Description</mat-label>
+				<textarea formControlName="description" matInput>
+				</textarea>
+			</mat-form-field>
+
+			<mat-form-field *ngIf="isTicketClosed">
+				<mat-label>Solution</mat-label>
+				<textarea formControlName="solution" matInput>
+				</textarea>
+				<mat-error>Field is required</mat-error>
+			</mat-form-field>
+
+			<div class="layout-row">
+				<mat-form-field class="layout-flex between">
+					<input matInput 
+						[matDatepicker]="createdPicker"
+						formControlName="dateCreated"
+						(click)="createdPicker.open()"
+						placeholder="Date Created" readonly>
+					<mat-datepicker-toggle matSuffix [for]="createdPicker"></mat-datepicker-toggle>
+					<mat-datepicker #createdPicker touchUi></mat-datepicker>
+				</mat-form-field>
+
+				<mat-form-field class="layout-flex between">
+					<input matInput [matDatepicker]="closedPicker"
+						formControlName="dateClosed"
+						(click)="closedPicker.open()"
+						placeholder="Date Closed" readonly>
+					<mat-datepicker-toggle matSuffix [for]="closedPicker"></mat-datepicker-toggle>
+					<mat-datepicker #closedPicker touchUi [disabled]="!isTicketClosed"></mat-datepicker>
+					<mat-error *ngIf="ticketForm.get('dateClosed').hasError('required')">Field is required</mat-error>
+				</mat-form-field>
+			</div>
+
+			<div class="layout-row">
+				<ngb-timepicker  [meridian]="true" class="layout-flex between" formControlName="timeCreated"></ngb-timepicker>
+				<ngb-timepicker  [meridian]="true" class="layout-flex between" formControlName="timeClosed"></ngb-timepicker>
+			</div>
+
+			<button type="submit" 
+				mat-raised-button 
+				color="primary" 
+				class="pull-right">Save</button>
+			<button type="button" 
+				mat-raised-button 
+				color="warn" 
+				class="pull-right"
+				(click)="onCancel()">Cancel</button>
+		</form>
+	</mat-card-content>	
+</mat-card>

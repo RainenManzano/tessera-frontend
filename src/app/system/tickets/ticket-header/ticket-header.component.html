@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-content>
+    <nav>
+      <ul>
+        <li>
+          <button mat-raised-button 
+            (click)="openDialog()">
+            Add Ticket
+          </button>
+        </li>
+        <li 
+        *ngFor="let status of listOfStatus" 
+        (click)="onClicked(status)"
+        [ngClass]="{'nav-active': status===activeStatus}"
+        class="stats">
+          <a>{{ status }}</a>
+        </li>
+        <!-- <li id="search" class="pull-right"> -->
+          <!-- <mat-form-field>
+            <mat-label><i class="fas fa-search"></i>&nbsp;&nbsp;Search</mat-label>
+            <input matInput (keyup)="searchTicket(searchInput.value)" #searchInput>
+          </mat-form-field> -->
+        <!-- </li> -->
+      </ul>
+    </nav>
+  </mat-card-content>
+</mat-card>

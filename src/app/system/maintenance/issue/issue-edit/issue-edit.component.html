@@ -1,0 +1,56 @@
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Edit Issue</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+		<form [formGroup]="issueForm" (ngSubmit)="onSubmit()">
+
+			<mat-form-field>
+				<mat-label>Category</mat-label>
+				<mat-select formControlName="category">
+					<mat-option *ngFor="let category of categories" [value]="category.Category_Id">
+						{{ category.Name }}
+					</mat-option>
+				</mat-select>
+				<mat-error>This field is required</mat-error>
+			</mat-form-field>
+			<br><br>
+
+			<mat-form-field>
+				<mat-label>Priority</mat-label>
+				<mat-select formControlName="priority">
+					<mat-option *ngFor="let priority of priorities" [value]="priority.Priority_Id">
+						{{ priority.Level }}
+					</mat-option>
+				</mat-select>
+				<mat-error>This field is required</mat-error>
+			</mat-form-field>
+			<br><br>
+
+			<mat-form-field>
+				<mat-label>Issue</mat-label>
+				<input type="text" formControlName="issue" matInput>
+				<mat-error>This field is required</mat-error>
+			</mat-form-field>
+			<br><br>
+
+			<mat-form-field>
+				<mat-label>Description</mat-label>
+				<textarea formControlName="description" matInput>
+				</textarea>
+			</mat-form-field>
+			<br>
+
+			<button type="submit" 
+				mat-raised-button 
+				color="primary" 
+				class="pull-right">Save</button>
+			<button type="button" 
+				mat-raised-button 
+				color="warn" 
+				class="pull-right"
+				(click)="onCancel()">Cancel</button>
+
+		</form>
+	</mat-card-content>	
+</mat-card>

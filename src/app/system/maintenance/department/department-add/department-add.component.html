@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Add Department</h1>
+<form [formGroup]="departmentForm" (ngSubmit)="onAddDepartment()"> 
+<div mat-dialog-content>
+
+	<mat-form-field appearance="outline">
+	    <input matInput placeholder="Name" formControlName="name"> 
+	    <mat-error *ngIf="this.departmentForm.get('name').hasError('required')">Field is required</mat-error>
+	    <mat-error *ngIf="this.departmentForm.get('name').hasError('departmentExists')">Department name already exists</mat-error>
+	</mat-form-field>
+
+	<mat-form-field appearance="outline">
+		<mat-label>Description</mat-label>
+		<textarea formControlName="description" matInput></textarea>
+	</mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button cdkFocusInitial type="submit">Ok</button>
+</div>
+</form>

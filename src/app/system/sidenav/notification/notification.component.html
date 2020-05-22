@@ -1,0 +1,20 @@
+<ng-template #popNotificationTitle>
+	<label style="font-weight: 300;">Notifications</label>
+	<a style="float:right; font-size: 14px; cursor: pointer;" (click)="readAll()">Mark all as read</a>
+</ng-template>
+<ng-template #popNotificationContent>
+	<mat-list>
+		<mat-list-item *ngFor="let notification of notifications" id="notifContainer" 
+			[ngClass]="{'new': notification.Checked==0}" (click)="readNotification(notification.Notification_Id)"
+			[routerLink]="[notification.Url_String]" [queryParams]="{type: notification.Query_Params}">
+			<span>{{ notification.Notification_Message }}</span>
+		</mat-list-item>
+	</mat-list>
+</ng-template>
+<button type="button" mat-button style="padding-top: 5px;"
+	[ngbPopover]="popNotificationContent" 
+	[popoverTitle]="popNotificationTitle"	
+	[autoClose]="true">
+ 	<i class="far fa-bell toolbar-icon"></i>
+ 	<span [matBadge]="countNotifications" matBadgeOverlap="false" matBadgeColor="warn"></span>
+</button>

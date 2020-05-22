@@ -1,0 +1,226 @@
+<mat-card>
+	<div class="row">
+		<div class="col-md-12 align-items-center">
+			<mat-form-field appearance="outline">
+				<mat-select value="today" (selectionChange)="onDateChange($event.value)">
+					<mat-option value="today">Today</mat-option>
+					<mat-option value="yesterday">Yesterday</mat-option>
+					<mat-option value="last 7 days">Last 7 Days</mat-option>
+					<mat-option value="last month">Last Month</mat-option>
+					<mat-option value="last year">Last Year</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+	</div>
+	<div class="row font-custom">
+		<!--  Registered Users COUNT -->
+		<div class="col-md-3" *ngIf="role==0 || role==1 || role==3">
+			<div class="custom-card border-blue">
+				<div class="custom-card-body">
+					<div class="row align-items-center custom-card-body-container">
+						<div class="col-md-8">
+							<div class="info-title text-blue">
+								Users
+							</div>
+							<div class="info-desc">
+								{{ users }} <br>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<i class="fas fa-users info-icon"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--  Employees COUNT -->
+		<div class="col-md-3" *ngIf="role==0 || role==2 || role==3">
+			<div class="custom-card border-pink">
+				<div class="custom-card-body">
+					<div class="row align-items-center custom-card-body-container">
+						<div class="col-md-8">
+							<div class="info-title text-pink">
+								Employees
+							</div>
+							<div class="info-desc">
+								{{ employees }} <br>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<i class="fas fa-user-tie info-icon"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--  Supports COUNT -->
+		<div class="col-md-3" *ngIf="role==0 || role==2 || role==3">
+			<div class="custom-card border-yellow">
+				<div class="custom-card-body">
+					<div class="row align-items-center custom-card-body-container">
+						<div class="col-md-8">
+							<div class="info-title text-yellow">
+								Supports
+							</div>
+							<div class="info-desc">
+								{{ supports }} <br>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<i class="fas fa-wrench info-icon"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--  OVERALL TICKETS COUNT -->
+		<div class="col-md-3" *ngIf="role==0 || role==1">
+			<div class="custom-card border-purple">
+				<div class="custom-card-body">
+					<div class="row align-items-center custom-card-body-container">
+						<div class="col-md-8">
+							<div class="info-title text-purple">
+								Overall Tickets
+							</div>
+							<div class="info-desc">
+								{{ totalTickets }} <br>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<i class="fas fa-ticket-alt info-icon"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--  MY TICKETS COUNT -->
+		<div class="col-md-3" *ngIf="role==1 || role==2">
+			<div class="custom-card border-green">
+				<div class="custom-card-body">
+					<div class="row align-items-center custom-card-body-container">
+						<div class="col-md-8">
+							<div class="info-title text-green">
+								My Tickets
+							</div>
+							<div class="info-desc">
+								{{ supportedTickets }}
+							</div>
+						</div>
+						<div class="col-md-4">
+							<i class="fas fa-headset info-icon"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--  ISSUED TICKETS COUNT -->
+		<div class="col-md-3" *ngIf="role==1 || role==2 || role==3">
+			<div class="custom-card border-sky">
+				<div class="custom-card-body">
+					<div class="row align-items-center custom-card-body-container">
+						<div class="col-md-8">
+							<div class="info-title text-sky">
+								My Issued Tickets
+							</div>
+							<div class="info-desc">
+								{{ issuedTickets }}
+							</div>
+						</div>
+						<div class="col-md-4">
+							<i class="fas fa-clipboard-list info-icon"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- CHARTS -->
+	<div class="row">
+		
+		<div class="col-md-8" *ngIf="role==0 || role==1 || role==2 || role==3">
+			<div class="custom-card">
+				<div class="card-header">
+					<h5 class="info-title">Recent Tickets</h5>
+				</div>
+				<div class="custom-card-body scrollable">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>Ticket #</th>
+								<th>Title</th>
+								<th>Last Updated</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let ticket of recentTickets">
+								<td>{{ ticket.Ticket_Id }}</td>
+								<td><a 
+											[routerLink]="['/sts', 'tickets', ticket.Ticket_Id]"
+											[queryParams]="{type: ticket.Type}">{{ ticket.Issue }}</a></td>
+								<td>{{ ticket.lastUpdated }}</td>
+								<td>{{ ticket.Status }} </td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4" *ngIf="role==0 || role==1 || role==2 || role==3">
+			<div class="custom-card">
+				<div class="card-header">
+					<h5 class="info-title">Top Issued Tickets</h5>
+				</div>
+				<div class="custom-card-body scrollable">
+					<ul class="list-group">
+					  <li class="list-group-item" *ngFor="let issue of topIssues; let i = index">
+					  	#{{ i+1 }} {{ issue.Issue }}
+					  </li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6" *ngIf="role==0 || role==1">
+			<div class="custom-card">
+				<div class="card-header">
+					<h5 class="info-title">Ticket Summary</h5>
+				</div>
+				<div class="custom-card-body">
+					<dashboard-all-tickets></dashboard-all-tickets>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6" *ngIf="role==0 || role==1 || role==2 || role==3">
+			<div class="custom-card">
+				<div class="card-header">
+					<h5 class="info-title">Department Ticket Summary</h5>
+				</div>
+				<div class="custom-card-body">
+					<dashboard-departments></dashboard-departments>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6" *ngIf="role==1 || role==2">
+			<div class="custom-card">
+				<div class="card-header">
+					<h5 class="info-title">My Ticket Summary</h5>
+				</div>
+				<div class="custom-card-body">
+					<dashboard-supported-tickets></dashboard-supported-tickets>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6" *ngIf="role==1 || role==2 || role==3">
+			<div class="custom-card">
+				<div class="card-header">
+					<h5 class="info-title">My Issued Ticket Summary</h5>
+				</div>
+				<div class="custom-card-body">
+					<dashboard-issued-tickets></dashboard-issued-tickets>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</mat-card>

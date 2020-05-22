@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Audit Trails</h1>	
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Log</th>
+			<th>Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let trail of trails">
+			<td>{{ trail.Trail_Log }}</td>
+			<td>{{ trail.Date_Created }}</td>
+		</tr>
+	</tbody>
+</table>

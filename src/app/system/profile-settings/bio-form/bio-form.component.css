@@ -1,0 +1,25 @@
+mat-expansion-panel {
+	margin: 20px;
+}
+
+.change {
+	width: auto;
+	height: 45px;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+
+.img-circle {
+	display:block; 
+	margin-left:auto; 
+	margin-right:auto; 
+	border:6px solid #2a2c2c; 
+	width:200px; 
+	height: 200px;
+}
+
+.file {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}

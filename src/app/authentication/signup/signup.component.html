@@ -1,0 +1,115 @@
+<img [src]="location + 'login-background2.jpg'" id="backgroundImage">
+<div id="register-box">
+	<div id="register-box-header">
+		<h3>Account Registration Form</h3>
+	</div>
+	<form [formGroup]="userForm" (ngSubmit)="onRegister()">
+
+		<div formGroupName="idForm">
+		    <mat-form-field appearance="outline" class="col-md-12" floatLabel="always">
+		    	<mat-label>Employee I.D.</mat-label>
+		   		<input matInput formControlName="empId">
+		   		<span matPrefix><i class="fas fa-id-card"></i>&nbsp;&nbsp;&nbsp;</span>
+				<mat-error *ngIf="this.userForm.get('idForm.empId').hasError('required')">Field is required</mat-error>
+				<mat-error *ngIf="this.userForm.get('idForm.empId').hasError('idExists')">
+					Employee ID already exists
+				</mat-error>
+			</mat-form-field>
+		</div>
+
+		<div formGroupName="personalForm">
+			<mat-form-field class="col-md-4" appearance="outline">
+				<mat-label>Lastname</mat-label>
+				<input matInput  formControlName="lastname">
+		   		<mat-error>Field is required</mat-error>
+		   	</mat-form-field>
+	    	<mat-form-field class="col-md-4" appearance="outline">
+	    		<mat-label>Firstname</mat-label>
+	    		<input matInput formControlName="firstname">
+		   		<mat-error>Field is required</mat-error>
+	     	</mat-form-field>
+			<mat-form-field class="col-md-4" appearance="outline">
+				<mat-label>Middlename</mat-label>
+		   		<input matInput formControlName="middlename"><mat-error>Field is required</mat-error>
+			</mat-form-field>
+		</div>
+
+		<div formGroupName="idForm">
+		    <mat-form-field class="col-md-12" appearance="outline" floatLabel="always">
+		    	<mat-label>Email</mat-label>
+		    	<input matInput formControlName="email">
+		    	<span matPrefix><i class="fas fa-envelope"></i>&nbsp;&nbsp;&nbsp;</span>
+				<mat-error *ngIf="this.userForm.get('idForm.email').hasError('required')">Field is required</mat-error>
+				<mat-error *ngIf="this.userForm.get('idForm.email').hasError('email')">Invalid Email</mat-error>
+				<mat-error *ngIf="this.userForm.get('idForm.email').hasError('emailExists')">
+					Email already exists
+				</mat-error>
+			</mat-form-field>
+		</div>
+	
+		<div formGroupName="companyForm">
+			<mat-form-field class="col-md-6" appearance="outline">
+				<mat-label>Department</mat-label>
+				<mat-select formControlName="department"
+					(selectionChange)="onDepartmentChange()">
+					<div *ngFor="let department of departments">
+						<mat-option
+							*ngIf="department.Department_Id!=0"
+							[value]="department.Department_Id">
+							{{ department.Name}}
+						</mat-option>
+					</div>
+				</mat-select>
+				<mat-error>Field is required</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="col-md-6" appearance="outline">
+				<mat-label>Position</mat-label>
+				<mat-select formControlName="position">
+					<div *ngFor="let position of positions
+						| positionFilter: selectedDept">
+						<mat-option
+							*ngIf="position.Position_Id!=0"
+							[value]="position.Position_Id">
+							{{ position.Position_Name}}
+						</mat-option>
+					</div>
+				</mat-select>
+				<mat-error>Field is required</mat-error>
+			</mat-form-field>
+		</div>
+
+		<div formGroupName="credentialForm">
+		   	<mat-form-field class="col-md-6" appearance="outline">
+		  		<mat-label>Username</mat-label>
+		   		<input matInput formControlName="username">
+		   		<mat-error *ngIf="this.userForm.get('credentialForm.username').hasError('required')">
+		   		Field is required
+		   		</mat-error>
+		   		<mat-error *ngIf="this.userForm.get('credentialForm.username').hasError('usernameExists')">
+					Username already exists
+				</mat-error>
+		   	</mat-form-field>
+			<mat-form-field class="col-md-6" appearance="outline">
+		  		<mat-label>Password</mat-label>
+	     		<input type="password" matInput formControlName="password">
+	      		<mat-error *ngIf="userForm.get('credentialForm.password').hasError('required')">Field is required</mat-error>
+	     	</mat-form-field>
+	      	<mat-form-field class="col-md-6" appearance="outline">
+	      		<mat-label>Confirm Password</mat-label>
+	    		<input type="password" matInput formControlName="confirmPassword">
+	    		<mat-error *ngIf="userForm.get('credentialForm.confirmPassword').hasError('required')">Field is required</mat-error>
+	    		<mat-error *ngIf="userForm.get('credentialForm.confirmPassword').hasError('confirmPassword')">
+	    			Password does not match
+	    		</mat-error>
+		    </mat-form-field>
+		</div>
+
+		<input type="file" class="col-md-4" (change)="onFileChange($event)">
+
+		<div class="col-md-2">
+			<button mat-raised-button type="submit" color="accent" style="width:100%;">Submit</button>
+		</div>
+		
+	</form>
+</div>

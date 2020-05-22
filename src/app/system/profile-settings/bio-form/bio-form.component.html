@@ -1,0 +1,75 @@
+<div>
+	<img [src]="userInfoImg" class="img-circle">
+	<input type="file" placeholder="Upload image" (change)="fileChange($event)" class="file">
+	<button mat-stroked-button color="primary" *ngIf="fileChanged" (click)="changePicture()" class="file">Submit</button>
+</div>
+<form [formGroup]="bioForm" (ngSubmit)="onSubmitBioForm()">
+	<mat-expansion-panel>
+		<mat-expansion-panel-header>
+			<mat-panel-title> Personal data </mat-panel-title>
+			<mat-panel-description>
+				Update Personal Information
+			</mat-panel-description>
+			<span class="pull-right" style="margin-right: 10px;"><i class="fas fa-user-cog"></i></span>
+		</mat-expansion-panel-header>
+		<div class="row">
+			<mat-form-field appearance="outline" class="col-md-9">
+		    	<mat-label>Employee I.D.</mat-label>
+				<input matInput formControlName="employeeId">
+				<mat-error *ngIf="bioForm.get('employeeId').hasError('required')">Field is required</mat-error>
+		    </mat-form-field>
+		    <button mat-stroked-button color="primary" class="col-md-1 change" type="button"
+		    	(click)="enableBioForm(['employeeId'])" *ngIf="cancelEmployeeId==false">
+		    	<i class="fa fa-edit"></i>
+		    </button>
+		    <button mat-stroked-button color="warn" class="col-md-2 change" type="button"
+		    	(click)="disableBioForm(['employeeId'])" *ngIf="cancelEmployeeId==true">
+		    	Cancel
+		    </button>
+		</div>
+		<div class="row">
+			<mat-form-field appearance="outline" class="col-md-9">
+		    	<mat-label>Email</mat-label>
+				<input matInput formControlName="email">
+				<mat-error *ngIf="bioForm.get('email').hasError('required')">Field is required</mat-error>
+				<mat-error *ngIf="bioForm.get('email').hasError('email')">Invalid email</mat-error>
+		    </mat-form-field>
+		    <button mat-stroked-button color="primary" class="col-md-1 change" type="button"
+		    	(click)="enableBioForm(['email'])" *ngIf="cancelEmail==false">
+		    	<i class="fa fa-edit"></i>
+		    </button>
+		    <button mat-stroked-button color="warn" class="col-md-2 change" type="button"
+		    	(click)="disableBioForm(['email'])" *ngIf="cancelEmail==true">
+		    	Cancel
+		    </button>
+		</div>
+	   	<div class="row">
+	    	<mat-form-field appearance="outline" class="col-md-3">
+			   	<mat-label>Firstname</mat-label>
+				<input matInput formControlName="firstname">
+				<mat-error *ngIf="bioForm.get('firstname').hasError('required')">Field is required</mat-error>
+		    </mat-form-field>
+		    <mat-form-field appearance="outline" class="col-md-3">
+		    	<mat-label>Middlename</mat-label>
+				<input matInput formControlName="middlename">
+				<mat-error *ngIf="bioForm.get('middlename').hasError('required')">Field is required</mat-error>
+		    </mat-form-field>
+		    <mat-form-field appearance="outline" class="col-md-3">
+		    	<mat-label>Lastname</mat-label>
+				<input matInput formControlName="lastname">
+				<mat-error *ngIf="bioForm.get('lastname').hasError('required')">Field is required</mat-error>
+		    </mat-form-field>
+		    <button mat-stroked-button color="primary" class="col-md-1 change" type="button"
+		    	(click)="enableBioForm(['firstname', 'middlename', 'lastname'])" *ngIf="cancelName==false">
+			   	<i class="fa fa-edit"></i>
+		    </button>
+		    <button mat-stroked-button color="warn" class="col-md-2 change" type="button"
+		    	(click)="disableBioForm(['firstname', 'middlename', 'lastname'])" *ngIf="cancelName==true">
+		    	Cancel
+		    </button>
+		</div>
+		<mat-action-row>
+			<button mat-button color="primary" type="submit">Save</button>
+	   </mat-action-row>
+	</mat-expansion-panel>
+</form>

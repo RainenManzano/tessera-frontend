@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Registration Type</h1>
+<form [formGroup]="registerTypeForm" (ngSubmit)="onRegisterType()"> 
+	<div mat-dialog-content>
+
+		<mat-form-field>
+			<mat-label>Type</mat-label>
+			<mat-select formControlName="type">
+				<mat-option value="1">IT Head</mat-option>
+				<mat-option value="2">IT Staff</mat-option>
+				<mat-option value="3">Employee</mat-option>
+			</mat-select>
+		</mat-form-field>
+
+	</div>
+	<div mat-dialog-actions>
+	  <button mat-button (click)="cancel()" class="pull-right">Cancel</button>
+	  <button mat-button cdkFocusInitial type="submit" class="pull-right">Ok</button>
+	</div>
+</form>
